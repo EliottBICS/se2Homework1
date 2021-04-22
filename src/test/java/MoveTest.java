@@ -33,7 +33,9 @@ public class MoveTest {
   public void equals_returnsTrueIfMovesAreTheSame_true() {
     Move firstMove = new Move("Punch", "Normal", 50.0, 100);
     Move secondMove = new Move("Punch", "Normal", 50.0, 100);
+    Pokemon myPokemon = new Pokemon("Squirtle", "Water", "None", "A cute turtle", 50.0, 12, 16, false);
     assertTrue(firstMove.equals(secondMove));
+    assertFalse(firstMove.equals(myPokemon));
   }
 
   @Test
@@ -41,6 +43,14 @@ public class MoveTest {
     Move newMove = new Move("Punch", "Normal", 50.0, 100);
     newMove.save();
     assertEquals(1, Move.all().size());
+  }
+  
+  @Test
+  public void delete_deletesMoveCorrectly_1() {
+    Move newMove = new Move("Punch", "Normal", 50.0, 100);
+    newMove.save();
+    newMove.delete();
+    assertEquals(0, Move.all().size());
   }
 
   @Test
@@ -82,7 +92,7 @@ public class MoveTest {
   public void attack_method_does_damage() {
     Move myMove = new Move("Punch", "Normal", 60.0, 100);
     Pokemon otherPokemon = new Pokemon("Vanilla pokemon", "Normal", "None", "a normal pokemon", 50.0, 12, 16, false);
-    assertEquals("The attack does 60.00 damage!", myMove.attack(otherPokemon));
+    assertEquals("The attack does 60,00 damage!", myMove.attack(otherPokemon));
   }
 
   @Test
